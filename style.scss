@@ -1,0 +1,683 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
+
+@mixin heading-font($weight: 400) {
+  font-family: "DM Serif Display", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin text-font {
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin hover {
+  position: relative;
+  display: inline-block; // This makes sure the pseudo-element's width matches the content.
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: $secondary-color; // The underline color
+    transform: scaleX(0); // Start with no underline
+    transform-origin: bottom left;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover::after,
+  &:focus::after {
+    transform: scaleX(1); // Expands underline to full width of the text
+  }
+}
+
+$primary-color: #292f36;
+$secondary-color: #cda274;
+$accent-color: #f4f0ec;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  //border: 2px red dotted;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 800px; /* Optional: limits the size to which the SVG can grow */
+    }
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ul {
+      padding: 0; // Remove default padding
+      margin: 0; // Remove default margin
+      display: flex;
+      gap: 31px;
+
+      li {
+        list-style-type: none;
+        position: relative; // Required for positioning the pseudo-element
+        padding: 0; // Adjust padding as needed
+
+        a {
+          @include text-font();
+          color: $primary-color;
+          text-decoration: none; // Remove the default underline
+          cursor: pointer; // Indicates the link is clickable
+          @include hover();
+        }
+      }
+    }
+  }
+}
+
+.hero-section {
+  background: url("./Assets/Picture1.jpg") no-repeat center center;
+  background-size: cover;
+  height: 94.2vh; // Adjust the height as necessary
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; // Align content to the left
+  text-align: left; // Left align the text
+  padding-left: 10%; // Add padding to the left side
+  position: relative;
+  color: white; // Adjust text color based on your design needs
+  border-bottom-left-radius: 25%;
+
+  // Darken the background image to make the text stand out more
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); // Adjust the color and opacity as needed
+    z-index: 1;
+    border-bottom-left-radius: 25%;
+  }
+
+  .hero-content {
+    max-width: 600px; // Adjust based on your content size
+    z-index: 2; // Make sure content is above the ::after overlay
+    padding: 2rem;
+
+    h1 {
+      @include heading-font();
+      font-size: 3rem; // Adjust the font size as necessary
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(41, 47, 54, 0.5); // Adds a shadow for better readability
+      @include hover();
+    }
+
+    p {
+      @include text-font();
+      font-size: 1.25rem; // Adjust the font size as necessary
+      margin-bottom: 2rem;
+      text-shadow: 0 1px 3px rgba(41, 47, 54, 0.5); // Adds a shadow for better readability
+    }
+
+    .btn-get-started {
+      font-family: "Jost", sans-serif;
+      text-transform: uppercase;
+      text-decoration: none;
+      background-color: $primary-color; // Use your primary color here
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 2rem;
+      transition: background-color 0.3s ease;
+      display: inline-flex; // Use flex to align text and arrow
+      align-items: center; // Center the content vertically
+      justify-content: center; // Center the content horizontally
+
+      .arrow {
+        color: $secondary-color; // Use your secondary color here
+        margin-left: 0.5rem; // Spacing between text and arrow
+        transition: transform 0.3s ease; // Smooth transition for movement
+      }
+
+      &:hover {
+        background-color: darken(
+          $primary-color,
+          10%
+        ); // Darken the button color on hover
+
+        .arrow {
+          transform: translateX(5px); // Move arrow to the right on hover
+        }
+      }
+    }
+  }
+}
+
+.stylish-living-section {
+  display: flex;
+  height: 100vh;
+  color: $primary-color;
+
+  .content {
+    flex-basis: 50%;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2; // Ensure text content is above the image
+
+    h1 {
+      @include heading-font();
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      width: fit-content;
+      @include hover();
+    }
+
+    p {
+      @include text-font();
+
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+
+      .phone-icon {
+        font-size: 2rem; // Adjust the size as needed
+        margin-right: 0.5rem;
+        background-color: $accent-color;
+        color: $secondary-color;
+        padding: 1rem;
+        border-radius: 50%;
+        font-weight: 100;
+      }
+
+      .phone-number {
+        font-family: "Jost", sans-serif;
+        font-weight: 400;
+        font-size: 1rem;
+      }
+    }
+
+    .btn-get-estimate {
+      font-family: "Jost", sans-serif;
+      text-transform: uppercase;
+      text-decoration: none;
+      background-color: $primary-color; // Use your primary color here
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 2rem;
+      transition: background-color 0.3s ease;
+      display: inline-flex; // Use flex to align text and arrow
+      align-items: center; // Center the content vertically
+      justify-content: center; // Center the content horizontally
+
+      .arrow {
+        color: $secondary-color; // Use your secondary color here
+        margin-left: 0.5rem; // Spacing between text and arrow
+        transition: transform 0.3s ease; // Smooth transition for movement
+      }
+
+      &:hover {
+        background-color: darken(
+          $primary-color,
+          10%
+        ); // Darken the button color on hover
+
+        .arrow {
+          transform: translateX(5px); // Move arrow to the right on hover
+        }
+      }
+    }
+  }
+
+  .image-container {
+    flex-basis: 50%;
+    background: url("./Assets/Picture2.jpg") no-repeat center center / cover;
+    // Make the container a circle that's half the height of the viewport
+    border-top-right-radius: 25vh;
+    border-bottom-left-radius: 25vh;
+    overflow: hidden;
+    position: relative;
+  }
+}
+
+.why-choose-us-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly; // Distribute space evenly
+  padding-top: 2rem; // Adds padding at the top
+  text-align: center;
+  background-color: #f8f8f8; // Assuming a light background for the section
+
+  .section-title {
+    @include heading-font();
+    font-size: 3.5rem; // Adjust the size as needed
+    color: #292f36; // Example heading color
+    margin-top: 0; // Reduce top margin to move title up
+    margin-bottom: 3rem; // Space above the cards
+    @include hover();
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem; // Space between cards
+    max-width: 1200px; // Maximum width of the cards container
+    justify-content: center;
+
+    .card {
+      width: 30%; // Each card takes up 30% of the container width
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 5px; // Slightly rounded corners for the cards
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Subtle shadow
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      &:hover {
+        transform: translateY(-5px); // Lift card on hover
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); // Darken shadow on hover
+      }
+
+      h3 {
+        @include heading-font();
+        font-size: 2rem;
+        color: #292f36; // Heading color inside card
+        margin-bottom: 1rem;
+        @include hover();
+
+        i {
+          color: $secondary-color;
+          padding: 1rem;
+        }
+      }
+
+      p {
+        @include text-font();
+        font-size: 1rem;
+        color: #292f36; // Paragraph text color
+        margin-bottom: 2rem;
+      }
+
+      // Adjust below for your "Read More" button/link styles
+      a {
+        font-family: "Jost", sans-serif;
+        font-weight: 500;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #292f36; // Adjust as needed
+        background: none;
+        border: none;
+        padding: 0.5rem 1rem;
+        display: inline-block; // Center the link
+        transition: color 0.3s ease;
+        &:hover {
+          color: darken(#292f36, 20%); // Darken the link on hover
+        }
+      }
+    }
+  }
+
+  @media (max-width: 991px) {
+    .cards {
+      .card {
+        width: 48%; // Make cards take full width on smaller screens
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .cards {
+      .card {
+        width: 100%; // Stack cards on very small screens
+      }
+    }
+  }
+}
+
+.what-we-buy-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $accent-color;
+  padding: 2rem;
+  text-align: center;
+
+  .section-title {
+    @include heading-font();
+    font-size: 2.5rem;
+    color: $primary-color;
+    margin-bottom: 2rem;
+    @include hover();
+  }
+
+  .item-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* This will center all items */
+    gap: 2rem;
+    padding: 10px;
+    width: 100%;
+    max-width: 1200px;
+
+    li {
+      flex: 1 1 250px; /* Flex items with a basis of 250px, but allow them to grow */
+      max-width: 250px; /* Ensuring items do not grow beyond 250px */
+      @include text-font;
+      background: $primary-color;
+      color: $secondary-color;
+      padding: 1.5rem;
+      border-radius: 10px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      &:hover {
+        transform: translateY(-5px);
+        background-color: darken($primary-color, 10%);
+      }
+
+      i {
+        font-size: 1rem; // Icon size
+        margin-bottom: 1rem;
+      }
+
+      h3 {
+        @include heading-font;
+        margin-bottom: 0.5rem;
+        @include hover();
+      }
+
+      p {
+        color: $accent-color;
+      }
+    }
+  }
+}
+
+.contact-us-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  padding: 4rem;
+  color: $primary-color;
+
+  .section-heading {
+    @include heading-font(700);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    @include hover();
+  }
+
+  .contact-info {
+    flex-basis: 50%;
+    @include heading-font(700);
+
+    h2 {
+      text-align: center;
+    }
+
+    .contact-details {
+      background-color: lighten($accent-color, 10%);
+      padding: 2rem;
+      border-radius: 20px;
+      background-color: $accent-color;
+      p {
+        @include text-font;
+        margin: 1rem 0;
+        i {
+          margin-right: 0.5rem;
+          background-color: white;
+          padding: 0.5rem;
+          border-radius: 50%;
+        }
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: space-around;
+        i {
+          font-size: 1.5rem;
+          margin: 0.5rem;
+          transition: color 0.3s ease;
+          &:hover {
+            color: $secondary-color;
+          }
+        }
+      }
+    }
+  }
+
+  .contact-form {
+    flex-basis: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    input,
+    textarea {
+      border: none;
+      border-bottom: 2px solid $primary-color;
+      background-color: transparent;
+      padding: 0.5rem 0;
+      @include text-font;
+      &::placeholder {
+        color: $primary-color;
+      }
+      &:hover,
+      &:focus {
+        border-bottom-color: $secondary-color;
+        outline: none;
+      }
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    button {
+      padding: 1rem 2rem;
+      background-color: $primary-color;
+      color: $accent-color;
+      border: none;
+      border-radius: 2rem;
+      @include text-font;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: inline-flex; // Use flexbox to align the text and the arrow
+      align-items: center;
+      justify-content: center;
+
+      .arrow {
+        color: $secondary-color; // Use accent color for the arrow
+        margin-left: 0.5rem; // Space between text and arrow
+        transition: transform 0.3s ease; // Animate the transform property
+      }
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+
+        .arrow {
+          transform: translateX(5px); // Move the arrow to the right on hover
+        }
+      }
+    }
+  }
+  .divider {
+    height: 1px;
+    background-color: darken($accent-color, 15%);
+    margin: 2rem 0;
+  }
+
+  .footer {
+    @include text-font;
+    font-size: 0.875rem;
+    text-align: center;
+    padding: 1rem 0;
+  }
+}
+.hidden {
+  opacity: 0;
+  transform: translateY(20px); /* Elements move up slightly */
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0px); /* Elements settle into their natural position */
+}
+/* Extra small devices (phones, 320px to 479px) */
+@media (min-width: 320px) and (max-width: 479px) {
+  h1,
+  h2,
+  h3,
+  p,
+  a {
+    font-size: calc(
+      100% + 0.2vw
+    ); /* Slightly increase font size as the screen grows */
+  }
+
+  header nav ul {
+    gap: 5px;
+  }
+
+  .hero-section,
+  .stylish-living-section,
+  .why-choose-us-section,
+  .what-we-buy-section,
+  .contact-us-section {
+    padding: 10px; /* Adjust padding for smaller screens */
+    margin-bottom: 200px; /* Additional bottom margin to prevent overlap */
+  }
+
+  .why-choose-us-section,
+  .what-we-buy-section {
+    margin-bottom: 350px;
+  }
+  .what-we-buy-section {
+    height: fit-content;
+  }
+
+  .hero-content,
+  .content,
+  .cards,
+  .contact-info,
+  .contact-form {
+    flex-direction: column; /* Stack elements vertically */
+  }
+
+  .btn-get-started,
+  .btn-get-estimate {
+    padding: 0.8rem 1.6rem; /* Adjust button padding */
+  }
+}
+
+/* Small devices (phones, 480px to 767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+  .hero-section,
+  .stylish-living-section,
+  .why-choose-us-section,
+  .what-we-buy-section,
+  .contact-us-section {
+    padding: 15px; /* Slightly more padding */
+    margin-bottom: 150px; /* Increase bottom margin to prevent overlap */
+  }
+  .what-we-buy-section {
+    height: fit-content;
+  }
+}
+
+/* Medium devices (tablets, 768px to 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  h1 {
+    font-size: 2.5rem; /* Larger font size for tablets */
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+
+  .cards .card {
+    width: 48%; /* Two cards per row, suitable for tablets */
+  }
+
+  .hero-section,
+  .stylish-living-section,
+  .why-choose-us-section,
+  .what-we-buy-section,
+  .contact-us-section {
+    padding: 20px; /* More padding */
+    margin-bottom: 100px; /* Increased bottom margin for clear animation visibility */
+  }
+  .what-we-buy-section {
+    height: fit-content;
+  }
+}
+
+/* Large devices (desktops, 992px to 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .hero-section,
+  .stylish-living-section,
+  .why-choose-us-section,
+  .what-we-buy-section,
+  .contact-us-section {
+    padding: 20px 40px; /* Adequate padding for desktops */
+    margin-bottom: 50px; /* Larger bottom margin to accommodate animations */
+  }
+
+  .cards .card {
+    width: 30%; /* Three cards per row */
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .hero-content,
+  .content,
+  .cards,
+  .contact-info,
+  .contact-form {
+    flex-direction: row; /* Horizontal layout for larger screens */
+    justify-content: space-between; /* Space out elements effectively */
+  }
+
+  .hero-section,
+  .stylish-living-section,
+  .why-choose-us-section,
+  .what-we-buy-section,
+  .contact-us-section {
+    padding: 50px; /* Generous padding for very large screens */
+    margin-bottom: 60px; /* Maximize bottom margin for clear animations */
+  }
+}
